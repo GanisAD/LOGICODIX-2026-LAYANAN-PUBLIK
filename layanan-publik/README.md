@@ -19,7 +19,7 @@ If you are developing a production application, we recommend using TypeScript wi
 
 ``` Bash
 git clone <repository-url>
-cd LOGICODIX-2026-LAYANAN-PUBLIK
+cd LOGICODIX-2026-LAYANAN-PUBLIK/layanan-publik
 npm install
 ```
 
@@ -31,7 +31,7 @@ npm run dev
 
 Buka peramban di http://localhost:5173.
 
-### Directory Tree Definition
+## Directory Tree Definition
 
 ```
 licensing-navigator/
@@ -87,7 +87,7 @@ licensing-navigator/
 └── tsconfig.json
 ```
 
-### Directory Responsibility Mapping
+## Directory Responsibility Mapping
 
 * `scripts/`: Contains Node.js build automation modules. The `validate-data.js` script parses `src/data/intake-diagnostic.json` and all files in `src/data/services/` prior to build execution, halting continuous integration (CI) pipelines if schema or logic rules are breached (Story N8).
 * `src/data/`: Isolated static JSON datasets.
@@ -100,7 +100,7 @@ licensing-navigator/
 * `src/components/common/`: Global UI layout framing (`Layout.tsx`, `Header.tsx`), persistent anti-extortion complaint banners (`AntiExtortionBanner.tsx`), and prototype disclaimers (`DisclaimerFooter.tsx`) (Stories N5, N6, N7).
 * `src/hooks/` &amp; `src/utils/`: Custom React hooks and transformation utilities managing transient session storage (`useChecklistState.ts`), Base64/URI state string encoding (`urlEncoder.ts`, `useUrlState.ts`), and text exports (`exportFormatters.ts`) (Story N4).
 
-### Component Relationship Breakdown
+## Component Relationship Breakdown
 
 ```
                                  ┌─────────────────────────────────────┐
