@@ -7,10 +7,10 @@ export default function Header({ activeNav = 'Katalog Layanan', onNavClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: 'Beranda', href: '#' },
-    { label: 'Katalog Layanan', href: '#' },
-    { label: 'Panduan', href: '#' },
-    { label: 'Laporan Pungli', href: '#' }
+    { label: 'Beranda', href: '#/beranda' },
+    { label: 'Katalog Layanan', href: '#/katalog' },
+    { label: 'Panduan', href: '#/panduan' },
+    { label: 'Laporan Pungli', href: '#/laporan-pungli' }
   ];
 
   const handleItemClick = (e, label) => {
