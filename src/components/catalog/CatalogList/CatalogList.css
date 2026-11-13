@@ -1,0 +1,49 @@
+.catalog-list-section {
+  margin-bottom: 48px;
+}
+
+.catalog-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Empty State */
+.catalog-empty-state {
+  background-color: #ffffff;
+  border: 1px dashed var(--color-card-border);
+  border-radius: var(--radius-xl);
+  padding: 48px 24px;
+  text-align: center;
+  margin: 20px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-icon-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-tag-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.empty-title {
+  color: var(--color-primary-navy);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.empty-message {
+  color: var(--color-text-body);
+  font-size: 14px;
+  max-width: 480px;
+  line-height: 1.5;
+  margin: 0;
+}
