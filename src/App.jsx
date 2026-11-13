@@ -1,122 +1,129 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import Header from './components/common/Header/Header';
+import Footer from './components/common/Footer/Footer';
+import CatalogPage from './pages/CatalogPage/CatalogPage';
+import HomePage from './pages/HomePage/HomePage';
+import GuidePage from './pages/GuidePage/GuidePage';
+import ReportPage from './pages/ReportPage/ReportPage';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Route definition mapping
+const ROUTES = {
+  BERANDA: {
+    hash: '#/beranda',
+    label: 'Beranda'
+  },
+  KATALOG: {
+    hash: '#/katalog',
+    label: 'Katalog Layanan'
+  },
+  PANDUAN: {
+    hash: '#/panduan',
+    label: 'Panduan'
+  },
+  LAPORAN_PUNGLI: {
+    hash: '#/laporan-pungli',
+    label: 'Laporan Pungli'
+  }
+};
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+function getRouteFromHash(hash) {
+  switch (hash) {
+    case '#/beranda':
+      return 'Beranda';
+    case '#/panduan':
+      return 'Panduan';
+    case '#/laporan-pungli':
+      return 'Laporan Pungli';
+    case '#/katalog':
+    default:
+      return 'Katalog Layanan';
+  }
 }
 
-export default App
+function getHashFromLabel(label) {
+  switch (label) {
+    case 'Beranda':
+      return '#/beranda';
+    case 'Panduan':
+      return '#/panduan';
+    case 'Laporan Pungli':
+      return '#/laporan-pungli';
+    case 'Katalog Layanan':
+    default:
+      return '#/katalog';
+  }
+}
+
+/**
+ * App Router Component
+ * Coordinates routing and renders the active page view while maintaining global layout framing.
+ */
+function App() {
+  const [activeNav, setActiveNav] = useState(() => {
+    return getRouteFromHash(window.location.hash);
+  });
+  const [catalogSearchQuery, setCatalogSearchQuery] = useState('');
+
+  // Listen to browser navigation changes (Back/Forward / Hash change)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const currentRoute = getRouteFromHash(window.location.hash);
+      setActiveNav(currentRoute);
+    };
+
+    // If initial load has no hash or invalid hash, default to Beranda
+    if (!window.location.hash) {
+      window.location.hash = '#/beranda';
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Programmatic navigation handler
+  const handleNavigate = (pageLabel, searchQuery = '') => {
+    if (searchQuery) {
+      setCatalogSearchQuery(searchQuery);
+    }
+    const targetHash = getHashFromLabel(pageLabel);
+    if (window.location.hash === targetHash) {
+      setActiveNav(pageLabel);
+    } else {
+      window.location.hash = targetHash;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Route View Switcher
+  const renderPage = () => {
+    switch (activeNav) {
+      case 'Beranda':
+        return <HomePage onNavigate={handleNavigate} />;
+      case 'Panduan':
+        return <GuidePage onNavigate={handleNavigate} />;
+      case 'Laporan Pungli':
+        return <ReportPage />;
+      case 'Katalog Layanan':
+      default:
+        return <CatalogPage initialSearch={catalogSearchQuery} />;
+    }
+  };
+
+  return (
+    <div className="app-shell">
+      {/* Top Navigation Bar */}
+      <Header activeNav={activeNav} onNavClick={handleNavigate} />
+
+      {/* Dynamic Page Content View */}
+      <main className="app-main-view" role="main">
+        {renderPage()}
+      </main>
+
+      {/* Global Footer */}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;
