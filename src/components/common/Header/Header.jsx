@@ -28,11 +28,11 @@ export default function Header({ activeNav = 'Katalog Layanan', onNavClick }) {
         {/* Brand / Logo */}
         <a href="#" className="header-brand" onClick={(e) => handleItemClick(e, 'Beranda')}>
           <div className="brand-logo" aria-hidden="true">
-            <span>LP</span>
+            <span>SP</span>
           </div>
           <div className="brand-text">
-            <h1 className="brand-title">Layanan Publik RI</h1>
-            <p className="brand-subtitle">Portal Informasi & Layanan Terpadu</p>
+            <h1 className="brand-title">SIPERIKSA</h1>
+            <p className="brand-subtitle">Sistem Informasi Pelayanan Rakyat Interaktif Kota Surabaya</p>
           </div>
         </a>
 
