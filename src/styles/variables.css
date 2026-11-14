@@ -8,6 +8,32 @@
   --color-primary-orange-border: #ff6000;
   --color-logo-circle: #ff9f66;
 
+  /* Legacy & Wizard Design Tokens */
+  --color-navy: #002379;
+  --color-orange: #FF5500;
+  --color-orange-brand: #FF5F00;
+  --color-peach: #FF9F66;
+  --color-peach-bg: #FFF1EB;
+  --color-badge-bg: #FFF3E0;
+  --color-badge-text: #D9480F;
+  --color-page-bg: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-track: #E5E7EB;
+  --color-heading: #0B2246;
+  --color-subtitle: #64748B;
+  --color-muted: #6B7280;
+  --color-opt-title: #331200;
+  --color-opt-desc: #414753;
+  --color-radio-border: #C1C6D5;
+  --color-secure: #717785;
+  --color-card-bg: #FFFFFF;
+  --color-selected-bg: #FFFBF9;
+  --color-footer-text: #D1D5DB;
+  --color-secondary-text: #475569;
+  --color-bookmark: #4259AD;
+  --color-help-link: #5D5E5F;
+  --color-action-divider: rgba(255, 219, 201, 0.4);
+
   /* Tag & Badge Colors */
   --color-tag-bg: #fff7ed;
   --color-tag-border: #fed7aa;

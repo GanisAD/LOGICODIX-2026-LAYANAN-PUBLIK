@@ -14,7 +14,7 @@ body {
   min-height: 100%;
   font-family: var(--font-family-sans);
   background-color: var(--color-bg-page);
-  color: var(--color-text-body);
+  color: var(--color-text-dark);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,23 +26,27 @@ body {
   flex-direction: column;
 }
 
+/* Accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary-orange);
+  outline-offset: 2px;
+}
+
+/* Base link behavior */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-button,
-input {
-  font-family: inherit;
-}
-
+/* Base button reset */
 button {
+  font-family: inherit;
   cursor: pointer;
   border: none;
   background: none;
 }
 
-/* Scrollbar styles */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -59,4 +63,17 @@ button {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Sembunyikan radio input asli secara visual tanpa merusak aksesibilitas */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
