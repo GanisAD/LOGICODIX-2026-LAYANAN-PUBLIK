@@ -1,0 +1,15 @@
+.catalog-page {
+  width: 100%;
+}
+
+.catalog-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+@media (max-width: 768px) {
+  .catalog-container {
+    padding: 0 16px;
+  }
+}

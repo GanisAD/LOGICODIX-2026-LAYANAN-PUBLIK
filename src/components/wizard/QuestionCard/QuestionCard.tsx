@@ -1,4 +1,5 @@
 import React from 'react';
+import './QuestionCard.css';
 
 export interface QuestionOption {
   id: string;

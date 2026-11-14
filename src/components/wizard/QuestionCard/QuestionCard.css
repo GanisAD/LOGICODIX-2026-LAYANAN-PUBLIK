@@ -1,0 +1,416 @@
+/* ========================================================
+   QUESTION CARD
+   ======================================================== */
+
+.question-card {
+  margin-top: 30px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Badge Langkah */
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  border-radius: 6px;
+  background-color: var(--color-badge-bg);
+  color: var(--color-badge-text);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 10px;
+  margin-bottom: 16px;
+  user-select: none;
+}
+
+/* H1 & Subtitle */
+.question-heading {
+  margin: 0;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-heading);
+  outline: none;
+}
+
+.question-subtitle {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-subtitle);
+}
+
+/* Daftar Radio Group */
+.options-radiogroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Radio Card Item */
+.radio-card {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 17px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-card-bg);
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+/* State Hover */
+.radio-card:hover {
+  border-color: #CBD5E1;
+}
+
+/* State Terpilih via :has(input:checked) */
+.radio-card:has(input:checked) {
+  background-color: var(--color-selected-bg);
+  border-color: var(--color-orange);
+  box-shadow: 0 0 0 1px var(--color-orange), 0 4px 12px rgba(255, 85, 0, 0.08);
+}
+
+/* Fokus keyboard via :has(input:focus-visible) */
+.radio-card:has(input:focus-visible) {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+/* Radio Circle Bulat */
+.radio-circle {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--color-radio-border);
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.radio-card:has(input:checked) .radio-circle {
+  border-color: var(--color-orange);
+  background-color: var(--color-orange);
+}
+
+.radio-circle-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  display: none;
+}
+
+.radio-card:has(input:checked) .radio-circle-dot {
+  display: block;
+}
+
+/* Konten Teks Opsi */
+.radio-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.radio-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-opt-title);
+}
+
+.radio-desc {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-opt-desc);
+}
+
+/* Chip "Dipilih" */
+.radio-chip {
+  display: none;
+  height: 20px;
+  border-radius: 4px;
+  background-color: var(--color-orange);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 0 8px;
+  margin-left: 16px;
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.radio-card:has(input:checked) .radio-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kotak Bantuan */
+.help-box {
+  margin-top: 24px;
+  min-height: 52px;
+  border-radius: 12px;
+  background-color: var(--color-peach-bg);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.help-box-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.help-icon {
+  color: var(--color-badge-text);
+  min-width: 20px;
+  flex-shrink: 0;
+}
+
+.help-box-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.help-box-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-help-link);
+  text-decoration: underline;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.help-box-link:hover,
+.help-box-link:focus-visible {
+  color: var(--color-heading);
+}
+
+/* Garis Pemisah Aksi & Baris Aksi */
+.action-divider {
+  height: 1px;
+  background-color: var(--color-action-divider);
+  margin-top: 43px;
+  width: 100%;
+}
+
+.action-row {
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Tombol Utama */
+.btn-primary {
+  height: 50px;
+  border-radius: 12px;
+  background-color: var(--color-orange);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  border: none;
+  padding: 0 28px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(255, 85, 0, 0.35);
+  transition: opacity 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(255, 85, 0, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+/* Tombol Sekunder */
+.btn-secondary {
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--color-page-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-secondary-text);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 0 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #FFFFFF;
+  border-color: #CBD5E1;
+  color: var(--color-heading);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+.btn-icon-bookmark {
+  color: var(--color-bookmark);
+  flex-shrink: 0;
+}
+
+/* Teks & Ikon Keamanan */
+.secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-secure);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.secure-icon {
+  color: var(--color-secure);
+  flex-shrink: 0;
+}
+
+/* ========================================================
+   RESPONSIVITAS QUESTION CARD
+   ======================================================== */
+
+@media (max-width: 720px) {
+  .question-card {
+    padding: 20px 16px;
+    margin-top: 24px;
+  }
+
+  .question-heading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .question-subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Chip "Dipilih" posisi absolut di kanan atas kartu */
+  .radio-card {
+    position: relative;
+    padding: 17px 18px;
+    padding-top: 40px;
+  }
+
+  .radio-chip {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    margin-left: 0;
+  }
+
+  /* Kotak bantuan bertumpuk */
+  .help-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+
+  /* Garis pemisah aksi & tombol penuh lebar bertumpuk */
+  .action-divider {
+    margin-top: 28px;
+  }
+
+  .action-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .action-right-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .action-buttons-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .secure-badge {
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+}

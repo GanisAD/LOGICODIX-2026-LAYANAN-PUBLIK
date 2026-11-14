@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './WizardEngine.css';
 import QuestionCard, {
   QuestionOption,
   HelpBoxConfig,
-} from './QuestionCard';
+} from '../QuestionCard/QuestionCard';
 
 export interface StepDefinition {
   step: number;
