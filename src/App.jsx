@@ -6,6 +6,8 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import HomePage from './pages/HomePage/HomePage';
 import GuidePage from './pages/GuidePage/GuidePage';
 import ReportPage from './pages/ReportPage/ReportPage';
+import WizardPage from './pages/WizardPage/WizardPage';
+import ResultPage from './pages/ResultPage/ResultPage';
 
 // Route definition mapping
 const ROUTES = {
@@ -16,6 +18,14 @@ const ROUTES = {
   KATALOG: {
     hash: '#/katalog',
     label: 'Katalog Layanan'
+  },
+  WIZARD: {
+    hash: '#/wizard',
+    label: 'Panduan Pintar'
+  },
+  HASIL: {
+    hash: '#/hasil',
+    label: 'Halaman Hasil'
   },
   PANDUAN: {
     hash: '#/panduan',
@@ -28,9 +38,16 @@ const ROUTES = {
 };
 
 function getRouteFromHash(hash) {
-  switch (hash) {
+  // Potong query parameters jika ada (misal: #/hasil?cat=...)
+  const cleanHash = (hash || '').split('?')[0];
+
+  switch (cleanHash) {
     case '#/beranda':
       return 'Beranda';
+    case '#/wizard':
+      return 'Panduan Pintar';
+    case '#/hasil':
+      return 'Halaman Hasil';
     case '#/panduan':
       return 'Panduan';
     case '#/laporan-pungli':
@@ -45,6 +62,10 @@ function getHashFromLabel(label) {
   switch (label) {
     case 'Beranda':
       return '#/beranda';
+    case 'Panduan Pintar':
+      return '#/wizard';
+    case 'Halaman Hasil':
+      return '#/hasil';
     case 'Panduan':
       return '#/panduan';
     case 'Laporan Pungli':
@@ -82,11 +103,13 @@ function App() {
   }, []);
 
   // Programmatic navigation handler
-  const handleNavigate = (pageLabel, searchQuery = '') => {
-    if (searchQuery) {
-      setCatalogSearchQuery(searchQuery);
+  const handleNavigate = (pageLabel, queryParam = '') => {
+    if (pageLabel === 'Katalog Layanan' && queryParam) {
+      setCatalogSearchQuery(queryParam);
     }
-    const targetHash = getHashFromLabel(pageLabel);
+    const baseHash = getHashFromLabel(pageLabel);
+    const targetHash = queryParam && pageLabel === 'Halaman Hasil' ? `${baseHash}?${queryParam}` : baseHash;
+
     if (window.location.hash === targetHash) {
       setActiveNav(pageLabel);
     } else {
@@ -100,6 +123,10 @@ function App() {
     switch (activeNav) {
       case 'Beranda':
         return <HomePage onNavigate={handleNavigate} />;
+      case 'Panduan Pintar':
+        return <WizardPage onNavigate={handleNavigate} />;
+      case 'Halaman Hasil':
+        return <ResultPage onNavigate={handleNavigate} />;
       case 'Panduan':
         return <GuidePage onNavigate={handleNavigate} />;
       case 'Laporan Pungli':

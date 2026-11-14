@@ -117,7 +117,7 @@ export default function HomePage({ onNavigate }) {
             <button
               type="button"
               className="wizard-cta-btn"
-              onClick={() => setIsWizardOpen(true)}
+              onClick={() => onNavigate && onNavigate('Panduan Pintar')}
             >
               <span>Mulai Panduan Pintar (Wizard Rekomendasi)</span>
               <span aria-hidden="true">→</span>
@@ -155,7 +155,7 @@ export default function HomePage({ onNavigate }) {
             <button
               type="button"
               className="value-card-link"
-              onClick={() => setIsWizardOpen(true)}
+              onClick={() => onNavigate && onNavigate('Panduan Pintar')}
             >
               <span>Coba Wizard Otomatis</span>
               <span aria-hidden="true">→</span>

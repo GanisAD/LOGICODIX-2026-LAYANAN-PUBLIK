@@ -9,6 +9,7 @@ export default function Header({ activeNav = 'Katalog Layanan', onNavClick }) {
   const navItems = [
     { label: 'Beranda', href: '#/beranda' },
     { label: 'Katalog Layanan', href: '#/katalog' },
+    { label: 'Panduan Pintar', href: '#/wizard' },
     { label: 'Panduan', href: '#/panduan' },
     { label: 'Laporan Pungli', href: '#/laporan-pungli' }
   ];

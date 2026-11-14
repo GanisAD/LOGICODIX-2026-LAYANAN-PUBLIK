@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './WizardEngine.css';
 import QuestionCard, {
   QuestionOption,
   HelpBoxConfig,
-} from './QuestionCard';
+} from '../QuestionCard/QuestionCard';
 
 export interface StepDefinition {
   step: number;
@@ -221,9 +222,13 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
       (opt) => opt.id === selectedOptionId
     );
 
-    if (!chosenOption?.nextId) {
+    if (!chosenOption?.nextId || chosenOption.nextId === 'hasil-rekomendasi') {
+      const updatedAnswers = {
+        ...answers,
+        [currentQuestionId]: selectedOptionId,
+      };
       if (onFinish) {
-        onFinish(answers);
+        onFinish(updatedAnswers);
       }
       return;
     }

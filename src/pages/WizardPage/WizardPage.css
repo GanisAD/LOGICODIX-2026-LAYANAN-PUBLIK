@@ -1,0 +1,25 @@
+.wizard-page {
+  width: 100%;
+  min-height: calc(100vh - 160px);
+  padding: 32px 0 64px 0;
+  background-color: var(--color-bg-page, #f8fafc);
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-page-container {
+  width: 100%;
+  max-width: var(--max-width-container, 1140px);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .wizard-page {
+    padding: 20px 0 48px 0;
+  }
+
+  .wizard-page-container {
+    padding: 0 16px;
+  }
+}

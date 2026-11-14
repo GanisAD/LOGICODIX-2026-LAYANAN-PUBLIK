@@ -1,0 +1,127 @@
+/* ========================================================
+   WIZARD ENGINE & PROGRESS
+   ======================================================== */
+
+.wizard-engine {
+  width: 100%;
+  padding-top: 36px;
+  padding-bottom: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-progress-section {
+  width: 100%;
+}
+
+.progress-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.step-counter-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.step-percentage-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.progress-bars-grid {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.progress-segment {
+  height: 10px;
+  border-radius: 5px;
+  background-color: var(--color-track);
+  transition: background-color 0.2s ease;
+}
+
+.progress-segment.is-active {
+  background-color: var(--color-orange-brand);
+}
+
+.progress-segment.is-passed {
+  background-color: var(--color-navy);
+}
+
+.progress-segment.is-pending {
+  background-color: var(--color-track);
+}
+
+.progress-labels-grid {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.segment-label {
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.segment-label.is-active {
+  color: var(--color-orange-brand);
+  font-weight: 700;
+}
+
+.segment-label.is-passed {
+  color: var(--color-navy);
+  font-weight: 600;
+}
+
+.segment-label.is-pending {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+/* ========================================================
+   TOAST NOTIFICATION
+   ======================================================== */
+
+.wizard-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-navy);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 35, 121, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================================
+   RESPONSIVITAS WIZARD ENGINE
+   ======================================================== */
+
+@media (max-width: 720px) {
+  /* Label segmen disembunyikan kecuali yang aktif */
+  .progress-labels-grid .segment-label:not(.is-active) {
+    display: none;
+  }
+
+  .progress-labels-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
