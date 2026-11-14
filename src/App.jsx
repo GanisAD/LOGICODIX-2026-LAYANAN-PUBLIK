@@ -6,6 +6,7 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import HomePage from './pages/HomePage/HomePage';
 import GuidePage from './pages/GuidePage/GuidePage';
 import ReportPage from './pages/ReportPage/ReportPage';
+import WizardPage from './pages/WizardPage/WizardPage';
 
 // Route definition mapping
 const ROUTES = {
@@ -16,6 +17,10 @@ const ROUTES = {
   KATALOG: {
     hash: '#/katalog',
     label: 'Katalog Layanan'
+  },
+  WIZARD: {
+    hash: '#/wizard',
+    label: 'Panduan Pintar'
   },
   PANDUAN: {
     hash: '#/panduan',
@@ -31,6 +36,8 @@ function getRouteFromHash(hash) {
   switch (hash) {
     case '#/beranda':
       return 'Beranda';
+    case '#/wizard':
+      return 'Panduan Pintar';
     case '#/panduan':
       return 'Panduan';
     case '#/laporan-pungli':
@@ -45,6 +52,8 @@ function getHashFromLabel(label) {
   switch (label) {
     case 'Beranda':
       return '#/beranda';
+    case 'Panduan Pintar':
+      return '#/wizard';
     case 'Panduan':
       return '#/panduan';
     case 'Laporan Pungli':
@@ -100,6 +109,8 @@ function App() {
     switch (activeNav) {
       case 'Beranda':
         return <HomePage onNavigate={handleNavigate} />;
+      case 'Panduan Pintar':
+        return <WizardPage onNavigate={handleNavigate} />;
       case 'Panduan':
         return <GuidePage onNavigate={handleNavigate} />;
       case 'Laporan Pungli':

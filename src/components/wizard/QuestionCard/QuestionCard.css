@@ -94,8 +94,8 @@
   border-radius: 50%;
   border: 2px solid var(--color-radio-border);
   background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
+  display: grid;
+  place-items: center;
   justify-content: center;
   margin-right: 14px;
   box-sizing: border-box;
@@ -114,6 +114,7 @@
   border-radius: 50%;
   background-color: #FFFFFF;
   display: none;
+  margin: auto;
 }
 
 .radio-card:has(input:checked) .radio-circle-dot {
