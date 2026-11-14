@@ -222,9 +222,13 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
       (opt) => opt.id === selectedOptionId
     );
 
-    if (!chosenOption?.nextId) {
+    if (!chosenOption?.nextId || chosenOption.nextId === 'hasil-rekomendasi') {
+      const updatedAnswers = {
+        ...answers,
+        [currentQuestionId]: selectedOptionId,
+      };
       if (onFinish) {
-        onFinish(answers);
+        onFinish(updatedAnswers);
       }
       return;
     }

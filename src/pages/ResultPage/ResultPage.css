@@ -1,0 +1,1334 @@
+/* ========================================================
+   RESULT PAGE & PRINT STYLES
+   ======================================================== */
+
+.result-page {
+  width: 100%;
+  min-height: calc(100vh - 160px);
+  padding: 24px 0 64px 0;
+  background-color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-container {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Nav Back Row */
+.result-back-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.btn-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #002379;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn-back-link:hover {
+  text-decoration: underline;
+}
+
+.category-badge-pill {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.category-badge-pill strong {
+  color: #0f172a;
+}
+
+/* Official Header (Print/Mockup 1) */
+.official-gov-header {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.gov-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #ff5f00;
+}
+
+.gov-emblem-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gov-shield-icon {
+  width: 44px;
+  height: 44px;
+  background-color: #002379;
+  color: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.gov-subheading {
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gov-main-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #002379;
+  line-height: 1.2;
+}
+
+.gov-desc {
+  font-size: 13px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.gov-verify-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.verify-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+.gov-doc-title-box {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.doc-sheet-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #002379;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.doc-sheet-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* Metadata Bar */
+.gov-metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 14px;
+}
+
+.meta-item .meta-label {
+  font-size: 11px;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.meta-item .meta-val {
+  font-size: 13px;
+  color: #0f172a;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.meta-val.text-green {
+  color: #16a34a;
+}
+
+/* Hero / Highlight Banner */
+.result-hero-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.hero-pill-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.tag-orange {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+}
+
+.tag-navy {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.result-main-heading {
+  font-size: 28px;
+  font-weight: 800;
+  color: #002379;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.result-lead-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* 3 Stat Metrics Cards */
+.result-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.metric-card {
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-card.card-green {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.metric-card.card-blue {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+}
+
+.metric-card.card-orange {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+}
+
+.metric-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.metric-card.card-green .metric-top {
+  color: #15803d;
+}
+
+.metric-card.card-blue .metric-top {
+  color: #0369a1;
+}
+
+.metric-card.card-orange .metric-top {
+  color: #c2410c;
+}
+
+.metric-value {
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 8px;
+  line-height: 1.1;
+}
+
+.metric-card.card-green .metric-value {
+  color: #15803d;
+}
+
+.metric-card.card-blue .metric-value {
+  color: #002379;
+}
+
+.metric-card.card-orange .metric-value {
+  color: #0f172a;
+}
+
+.metric-subpill {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.metric-card.card-green .metric-subpill {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.metric-card.card-blue .metric-subpill {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.metric-card.card-orange .metric-subpill {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.metric-footer-note {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.metric-footer-note a {
+  color: #0284c7;
+  text-decoration: underline;
+}
+
+/* Anti Pungli Alert Banner */
+.anti-pungli-banner {
+  background: linear-gradient(135deg, #ff5f00 0%, #ea580c 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.25);
+}
+
+.pungli-content-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.pungli-icon-box {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.pungli-heading {
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pungli-stop-tag {
+  background: #ffffff;
+  color: #ea580c;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.pungli-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 4px;
+  color: #fff7ed;
+}
+
+.pungli-desc strong {
+  color: #ffffff;
+}
+
+.pungli-desc a {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.pungli-buttons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.btn-report-orange {
+  background: #ffffff;
+  color: #ea580c;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-report-white {
+  background: transparent;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-report-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Action Share & Print Bar */
+.action-share-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.share-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.share-bookmark-icon {
+  font-size: 20px;
+  color: #002379;
+}
+
+.share-bar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.share-bar-subtitle {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.share-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-action-print {
+  background: #002379;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(0, 35, 121, 0.2);
+}
+
+.btn-action-print:hover {
+  background: #001a5c;
+}
+
+.btn-action-wa {
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-action-wa:hover {
+  background: #16a34a;
+}
+
+.btn-action-copy {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-action-copy:hover {
+  background: #e2e8f0;
+}
+
+/* 2-Column Content Grid: Checklist vs Map/Steps */
+.result-content-split {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.result-section-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.section-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #002379;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.checklist-counter-badge {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+/* Checklist Items */
+.checklist-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checklist-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.checklist-item-card:hover {
+  border-color: #cbd5e1;
+}
+
+.checklist-item-card.is-checked {
+  background: #f8fafc;
+  border-color: #002379;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #94a3b8;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checklist-item-card.is-checked .custom-checkbox {
+  background: #002379;
+  border-color: #002379;
+  color: #ffffff;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.item-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.item-badge-free {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #f0fdf4;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.checklist-officer-tips {
+  background: #eff6ff;
+  border-left: 3px solid #3b82f6;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #1e40af;
+  margin-top: 16px;
+}
+
+/* Step Alur List */
+.steps-timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.step-row-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.step-num-bubble {
+  width: 28px;
+  height: 28px;
+  background: #002379;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.step-num-bubble.step-active {
+  background: #ff5f00;
+}
+
+.step-body-content {
+  flex: 1;
+}
+
+.step-item-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.step-item-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+.step-item-desc code {
+  background: #fef08a;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-weight: 700;
+  color: #854d0e;
+}
+
+.regulation-alert-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #92400e;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Right Side: Physical Counter & Map Box */
+.siola-box {
+  border-top: 3px solid #002379;
+}
+
+.assistance-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #166534;
+  background: #dcfce7;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.siola-desc {
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Mini OpenStreetMap Simulator */
+.map-canvas-container {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background-color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.map-bg-pattern {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(#94a3b8 1px, transparent 1px),
+    linear-gradient(to right, #f1f5f9 1px, transparent 1px),
+    linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px, 40px 40px;
+  background-color: #e2e8f0;
+}
+
+.map-marker-pin {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marker-label-tooltip {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+.marker-icon {
+  font-size: 20px;
+  color: #dc2626;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+}
+
+.map-controls-mock {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.map-controls-mock span {
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  cursor: default;
+}
+
+.siola-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.siola-info-item {
+  display: flex;
+  gap: 8px;
+}
+
+.siola-info-item strong {
+  color: #0f172a;
+}
+
+.siola-btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn-gmaps {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-call-center {
+  flex: 1;
+  background: #059669;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Call Center 112 Floating Card */
+.callcenter-emergency-card {
+  background: #001a5c;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cc-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cc-phone-bubble {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.cc-small-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #93c5fd;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cc-main-number {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.cc-subtext {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+.btn-telepon-cta {
+  background: #ff5f00;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Bottom OSS CTA */
+.bottom-oss-cta-row {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.btn-oss-giant {
+  background: #002379;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 35, 121, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-oss-giant:hover {
+  background: #001a5c;
+  transform: translateY(-1px);
+}
+
+/* Official Print Footer Banner */
+.official-print-footer {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qr-verification-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qr-code-box {
+  width: 54px;
+  height: 54px;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.qr-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.qr-sub {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.qr-sub em {
+  font-style: italic;
+}
+
+.iso-verify-badge {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #002379;
+  text-align: right;
+}
+
+.iso-verify-badge span {
+  display: block;
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Toast */
+.copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #002379;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ========================================================
+   PRINT A4 MEDIA QUERY (HANYA MENCETAK HASIL TANPA NAV)
+   ======================================================== */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Sembunyikan elemen web/navigasi */
+  .site-header,
+  .site-footer,
+  .result-back-bar,
+  .action-share-bar,
+  .callcenter-emergency-card,
+  .bottom-oss-cta-row,
+  .copy-toast {
+    display: none !important;
+  }
+
+  .result-page {
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .result-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .official-gov-header,
+  .result-hero-card,
+  .result-section-box,
+  .anti-pungli-banner,
+  .official-print-footer {
+    border: 1px solid #94a3b8 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .anti-pungli-banner {
+    background: #ea580c !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pungli-buttons {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.2cm;
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 860px) {
+  .gov-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gov-metadata-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .anti-pungli-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-share-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .result-content-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Utility Visibility Screen vs Print */
+.print-only {
+  display: none !important;
+}
+
+/* Penyesuaian Banner Anti-Pungli di Layar Web (Kuning sesuai Halaman Hasil.jpg) */
+.anti-pungli-banner {
+  background: #fefce8;
+  color: #713f12;
+  border: 1px solid #fde047;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pungli-icon-box {
+  width: 40px;
+  height: 40px;
+  background: #facc15;
+  color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.pungli-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: #713f12;
+}
+
+.pungli-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 4px;
+  color: #854d0e;
+}
+
+.pungli-desc strong {
+  color: #713f12;
+}
+
+.btn-report-orange {
+  background: #f97316;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 14px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-report-white {
+  background: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Highlight Step 3 di Web */
+.step-highlight-card {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.siola-sub-badge {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+/* ========================================================
+   PRINT A4 MEDIA QUERY (SESUAI HASIL CETAK.JPG)
+   ======================================================== */
+@media print {
+  .screen-only,
+  .app-shell > header,
+  .app-shell > footer,
+  .site-header,
+  .site-footer {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .official-print-footer.print-only,
+  .gov-top-row,
+  .gov-emblem-group {
+    display: flex !important;
+  }
+
+  .gov-metadata-grid {
+    display: grid !important;
+  }
+
+  body,
+  .result-page {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .result-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Ubah Banner Pungli menjadi Oranye Tegas saat Print (Hasil Cetak.jpg) */
+  .anti-pungli-banner {
+    background: linear-gradient(135deg, #ff5f00 0%, #ea580c 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .anti-pungli-banner .pungli-heading,
+  .anti-pungli-banner .pungli-desc,
+  .anti-pungli-banner .pungli-desc strong {
+    color: #ffffff !important;
+  }
+
+  .anti-pungli-banner .pungli-icon-box {
+    background: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .pungli-stop-tag {
+    display: inline-block !important;
+    background: #ffffff !important;
+    color: #ea580c !important;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    margin-left: 8px;
+  }
+
+  /* Susun ulang grid saat Print agar Checklist di kiri & 3 Langkah di kanan */
+  .result-content-split {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+
+  .result-left-column {
+    display: contents;
+  }
+
+  .siola-box {
+    grid-column: 1 / -1;
+  }
+
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+}
