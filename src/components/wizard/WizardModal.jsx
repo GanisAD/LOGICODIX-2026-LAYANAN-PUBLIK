@@ -3,18 +3,38 @@ import './WizardModal.css';
 import CloseIcon from '../icons/CloseIcon';
 import CheckIcon from '../icons/CheckIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
+import { servicesData } from '../../data/servicesData'; // Sesuaikan path folder data kamu
 
-export default function WizardModal({ isOpen, onClose, onSelectService }) {
-  const [step, setStep] = useState(1);
-  const [answers, setAnswers] = useState({
-    category: '',
-    purpose: ''
-  });
+export default function WizardModal({
+  isOpen,
+  onClose,
+  onSelectService,
+  initialServiceId = null
+}) {
+  // Filter hanya layanan yang memiliki struktur decision tree dari temanmu
+  const wizardServices = servicesData.filter(
+    (s) => s.startQuestionId && s.questions
+  );
+
+  const [selectedService, setSelectedService] = useState(null);
+  const [currentNodeId, setCurrentNodeId] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [explanationNote, setExplanationNote] = useState('');
 
   useEffect(() => {
     if (isOpen) {
-      setStep(1);
-      setAnswers({ category: '', purpose: '' });
+      if (initialServiceId) {
+        const found = wizardServices.find((s) => s.id === initialServiceId);
+        if (found) {
+          setSelectedService(found);
+          setCurrentNodeId(found.startQuestionId);
+        }
+      } else {
+        setSelectedService(null);
+        setCurrentNodeId(null);
+      }
+      setHistory([]);
+      setExplanationNote('');
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -22,50 +42,62 @@ export default function WizardModal({ isOpen, onClose, onSelectService }) {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isOpen]);
+  }, [isOpen, initialServiceId]);
 
   if (!isOpen) return null;
 
-  const handleCategorySelect = (categoryKey) => {
-    setAnswers((prev) => ({ ...prev, category: categoryKey }));
-    setStep(2);
+  const getServiceIcon = (id) => {
+    if (id.includes('ktp') || id.includes('adminduk')) return '📋';
+    if (id.includes('bpjs') || id.includes('health')) return '🏥';
+    if (id.includes('umkm') || id.includes('permits')) return '💼';
+    return '🏛️';
   };
 
-  const handlePurposeSelect = (purposeKey) => {
-    setAnswers((prev) => ({ ...prev, purpose: purposeKey }));
-    setStep(3);
+  const handleSelectService = (service) => {
+    setSelectedService(service);
+    setCurrentNodeId(service.startQuestionId);
+    setHistory([]);
+    setExplanationNote('');
   };
 
-  // Determine recommendation
-  const getRecommendation = () => {
-    if (answers.category === 'kesehatan') {
-      return {
-        id: 'bp-02',
-        title: 'Pendaftaran & Mutasi Kepesertaan BPJS Kesehatan',
-        desc: 'Layanan pendaftaran peserta baru, perubahan faskes pertama, dan cetak kartu digital.',
-        time: 'Instan - 1 Hari',
-        cost: 'Gratis biaya pendaftaran'
-      };
+  const handleOptionSelect = (option) => {
+    setHistory((prev) => [...prev, currentNodeId]);
+    setExplanationNote(option.explanation || '');
+    setCurrentNodeId(option.nextId);
+  };
+
+  const handleBack = () => {
+    setExplanationNote('');
+    if (history.length > 0) {
+      const prevNode = history[history.length - 1];
+      setHistory((prev) => prev.slice(0, -1));
+      setCurrentNodeId(prevNode);
+    } else {
+      setSelectedService(null);
+      setCurrentNodeId(null);
     }
-    if (answers.category === 'usaha') {
-      return {
-        id: 'iu-03',
-        title: 'Penerbitan NIB & Izin Usaha Mikro Kecil (OSS-RBA)',
-        desc: 'Pembuatan NIB online, legalitas UMKM, izin edar produk, dan sertifikasi standar.',
-        time: '1-3 Hari Kerja',
-        cost: 'Gratis (Rp 0)'
-      };
-    }
-    return {
-      id: 'dk-01',
-      title: 'Administrasi Kependudukan (KTP-el & Kartu Keluarga)',
-      desc: 'Penerbitan dan pembaruan dokumen kependudukan resmi Disdukcapil bebas pungutan.',
-      time: '1–2 Hari Kerja',
-      cost: 'Gratis (Rp 0)'
-    };
   };
 
-  const rec = getRecommendation();
+  const isResultNode =
+    selectedService &&
+    currentNodeId &&
+    selectedService.results &&
+    Boolean(selectedService.results[currentNodeId]);
+
+  const currentQuestion =
+    selectedService && !isResultNode
+      ? selectedService.questions.find((q) => q.id === currentNodeId)
+      : null;
+
+  const finalResult = isResultNode
+    ? selectedService.results[currentNodeId]
+    : null;
+
+  const currentStepNumber = !selectedService
+    ? 1
+    : isResultNode
+    ? 4
+    : Math.min((currentQuestion?.step || 1) + 1, 3);
 
   return (
     <div
@@ -89,109 +121,131 @@ export default function WizardModal({ isOpen, onClose, onSelectService }) {
             onClick={onClose}
             aria-label="Tutup panduan pintar"
           >
-            <CloseIcon size={20} color="#64748b" />
+            <CloseIcon size={20} color="#ffffff" />
           </button>
         </div>
 
         {/* Progress Bar */}
         <div className="wizard-progress-bar">
-          <div className={`step-dot ${step >= 1 ? 'active' : ''}`}>1</div>
-          <div className={`step-line ${step >= 2 ? 'active' : ''}`} />
-          <div className={`step-dot ${step >= 2 ? 'active' : ''}`}>2</div>
-          <div className={`step-line ${step >= 3 ? 'active' : ''}`} />
-          <div className={`step-dot ${step >= 3 ? 'active' : ''}`}>3</div>
+          <div className={`step-dot ${currentStepNumber >= 1 ? 'active' : ''}`}>1</div>
+          <div className={`step-line ${currentStepNumber >= 2 ? 'active' : ''}`} />
+          <div className={`step-dot ${currentStepNumber >= 2 ? 'active' : ''}`}>2</div>
+          <div className={`step-line ${currentStepNumber >= 3 ? 'active' : ''}`} />
+          <div className={`step-dot ${currentStepNumber >= 3 ? 'active' : ''}`}>3</div>
+          <div className={`step-line ${currentStepNumber >= 4 ? 'active' : ''}`} />
+          <div className={`step-dot ${currentStepNumber >= 4 ? 'active' : ''}`}>✓</div>
         </div>
 
         {/* Content */}
         <div className="wizard-content">
-          {step === 1 && (
+          {selectedService && (
+            <button
+              type="button"
+              onClick={handleBack}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#002379',
+                fontSize: '13px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                padding: '0 0 12px 0',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              ← Kembali ke langkah sebelumnya
+            </button>
+          )}
+
+          {explanationNote && (
+            <div
+              style={{
+                backgroundColor: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                borderRadius: '8px',
+                padding: '10px 14px',
+                fontSize: '12.5px',
+                color: '#1e40af',
+                marginBottom: '14px',
+                lineHeight: '1.45'
+              }}
+            >
+              <strong>💡 Info Panduan:</strong> {explanationNote}
+            </div>
+          )}
+
+          {/* Langkah 1: Pilih Layanan */}
+          {!selectedService && (
             <div className="wizard-step">
               <h3>Langkah 1: Apa kebutuhan administrasi Anda hari ini?</h3>
-              <p className="wizard-hint">Pilih salah satu sektor layanan publik berikut:</p>
+              <p className="wizard-hint">
+                Pilih salah satu sektor layanan publik Pemkot Surabaya:
+              </p>
               <div className="wizard-options">
-                <button
-                  type="button"
-                  className="wizard-option-card"
-                  onClick={() => handleCategorySelect('kependudukan')}
-                >
-                  <span className="option-icon">📋</span>
-                  <div className="option-text">
-                    <strong>Administrasi Kependudukan</strong>
-                    <span>KTP elektronik, Kartu Keluarga, Akta Kelahiran, Surat Pindah</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="wizard-option-card"
-                  onClick={() => handleCategorySelect('kesehatan')}
-                >
-                  <span className="option-icon">🏥</span>
-                  <div className="option-text">
-                    <strong>Kesehatan & BPJS</strong>
-                    <span>Pendaftaran KIS/BPJS Kesehatan, Pindah Faskes, Kartu Digital</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="wizard-option-card"
-                  onClick={() => handleCategorySelect('usaha')}
-                >
-                  <span className="option-icon">💼</span>
-                  <div className="option-text">
-                    <strong>Legalitas Usaha / UMKM</strong>
-                    <span>Nomor Induk Berusaha (NIB), Izin Edar P-IRT, Sertifikat Halal</span>
-                  </div>
-                </button>
+                {wizardServices.map((srv) => (
+                  <button
+                    key={srv.id}
+                    type="button"
+                    className="wizard-option-card"
+                    onClick={() => handleSelectService(srv)}
+                  >
+                    <span className="option-icon">{getServiceIcon(srv.id)}</span>
+                    <div className="option-text">
+                      <strong>{srv.title}</strong>
+                      <span>{srv.shortDescription}</span>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           )}
 
-          {step === 2 && (
+          {/* Langkah 2..N: Pertanyaan Bercabang */}
+          {selectedService && currentQuestion && !isResultNode && (
             <div className="wizard-step">
-              <h3>Langkah 2: Apa jenis permohonan spesifik Anda?</h3>
-              <p className="wizard-hint">Pilih kondisi berkas Anda:</p>
+              <h3>{currentQuestion.text}</h3>
+              <p className="wizard-hint">
+                Layanan: <strong>{selectedService.category}</strong> • Pilih kondisi yang paling sesuai:
+              </p>
               <div className="wizard-options">
-                <button
-                  type="button"
-                  className="wizard-option-card"
-                  onClick={() => handlePurposeSelect('baru')}
-                >
-                  <span className="option-icon">✨</span>
-                  <div className="option-text">
-                    <strong>Permohonan Baru</strong>
-                    <span>Belum pernah memiliki atau baru pertama kali mendaftar</span>
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="wizard-option-card"
-                  onClick={() => handlePurposeSelect('rusak_hilang')}
-                >
-                  <span className="option-icon">🔄</span>
-                  <div className="option-text">
-                    <strong>Pembaruan / Ganti Rusak / Hilang</strong>
-                    <span>Dokumen fisik rusak, hilang, atau terjadi perubahan elemen data</span>
-                  </div>
-                </button>
+                {currentQuestion.options.map((opt, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className="wizard-option-card"
+                    onClick={() => handleOptionSelect(opt)}
+                  >
+                    <span className="option-icon">
+                      {opt.label.toLowerCase().includes('tidak tahu') ? '❓' : '👉'}
+                    </span>
+                    <div className="option-text">
+                      <strong>{opt.label}</strong>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           )}
 
-          {step === 3 && (
+          {/* Langkah Akhir: Ringkasan & Navigasi ke ResultPage */}
+          {selectedService && isResultNode && finalResult && (
             <div className="wizard-step">
               <div className="recommendation-badge">
                 <CheckIcon size={16} color="#16a34a" />
                 <span>Rekomendasi Layanan Resmi Ditemukan!</span>
               </div>
               <div className="recommendation-card">
-                <h4>{rec.title}</h4>
-                <p>{rec.desc}</p>
+                <h4>{finalResult.title}</h4>
+                <p>{selectedService.shortDescription}</p>
                 <div className="rec-meta">
-                  <span>⏱️ <strong>Estimasi:</strong> {rec.time}</span>
-                  <span>💰 <strong>Biaya:</strong> {rec.cost}</span>
+                  <span>
+                    ⏱️ <strong>Estimasi:</strong> {finalResult.estimatedTime}
+                  </span>
+                  <span>
+                    💰 <strong>Biaya:</strong> {finalResult.officialFeeLabel}
+                  </span>
                 </div>
               </div>
               <div className="rec-actions">
@@ -200,12 +254,14 @@ export default function WizardModal({ isOpen, onClose, onSelectService }) {
                   className="btn-open-catalog"
                   onClick={() => {
                     onClose();
+                    window.location.hash = `#/hasil?service=${selectedService.id}&res=${finalResult.id}`;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     if (onSelectService) {
-                      onSelectService(rec.id);
+                      onSelectService(selectedService.id, finalResult.id);
                     }
                   }}
                 >
-                  <span>Buka di Katalog & Lihat Persyaratan Lengkap</span>
+                  <span>Buka Panduan Lengkap &amp; Checklist Berkas</span>
                   <ChevronRightIcon size={16} color="#ffffff" />
                 </button>
               </div>
