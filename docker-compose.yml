@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    image: siperiksa-web:latest
+    container_name: siperiksa-web
+    restart: unless-stopped
+    ports:
+      # Bind ke localhost saja; nginx di host yang jadi reverse proxy + terminasi TLS.
+      # Kalau container ini dipakai langsung di port 80, ganti jadi "80:80"
+      # dan pastikan nginx host sudah dimatikan.
+      - "127.0.0.1:8080:80"
