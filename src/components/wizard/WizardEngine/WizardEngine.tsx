@@ -1,199 +1,133 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './WizardEngine.css';
 import QuestionCard, {
   QuestionOption,
   HelpBoxConfig,
 } from '../QuestionCard/QuestionCard';
+import { getServiceById } from '../../../data/services';
 
-export interface StepDefinition {
-  step: number;
+export interface RawJsonOption {
   label: string;
+  nextId: string;
+  explanation?: string;
 }
 
-export interface QuestionData {
+export interface RawJsonQuestion {
   id: string;
-  stepNumber: number;
-  stepLabel: string;
+  step: number;
+  text: string;
+  helpText?: string;
+  options: RawJsonOption[];
+}
+
+export interface ServiceSchema {
+  id: string;
+  slug?: string;
   title: string;
-  subtitle: string;
-  options: QuestionOption[];
-  helpBox?: HelpBoxConfig | null;
-  isTerminalResult?: boolean;
+  shortDescription?: string;
+  category: string;
+  agency?: string;
+  startQuestionId: string;
+  questions: RawJsonQuestion[];
+  results: Record<string, unknown>;
 }
-
-export interface WizardServiceConfig {
-  id: string;
-  steps: StepDefinition[];
-  questions: Record<string, QuestionData>;
-  initialQuestionId: string;
-}
-
-// Fixture pengujian default sesuai spesifikasi desain gambar
-export const DEFAULT_WIZARD_DATA: WizardServiceConfig = {
-  id: 'layanan-kependudukan',
-  steps: [
-    { step: 1, label: '1. Kategori Layanan' },
-    { step: 2, label: '2. Detail Kebutuhan' },
-    { step: 3, label: '3. Lokasi & Waktu' },
-    { step: 4, label: '4. Hasil Rekomendasi' },
-  ],
-  initialQuestionId: 'kategori-layanan',
-  questions: {
-    'kategori-layanan': {
-      id: 'kategori-layanan',
-      stepNumber: 1,
-      stepLabel: 'Kategori Layanan',
-      title: 'Apa dokumen kependudukan yang hendak Anda urus?',
-      subtitle:
-        'Pilih salah satu dokumen resmi untuk memulai pembuatan panduan berkas kependudukan.',
-      helpBox: {
-        text: 'Ragu atau tidak yakin dengan jenis status dokumen Anda?',
-        linkText: 'Lihat Panduan Bantuan Opsi',
-        href: '#panduan-bantuan',
-      },
-      options: [
-        {
-          id: 'akta-kelahiran',
-          title: 'Akta Kelahiran',
-          description:
-            'Pencatatan kelahiran baru bagi anak, balita, maupun orang dewasa yang belum memiliki akta.',
-          nextId: 'detail-kebutuhan',
-        },
-        {
-          id: 'ktp-kk',
-          title: 'KTP Elektronik & Kartu Keluarga (KK)',
-          description:
-            'Perekaman baru 17 tahun, perubahan data identitas, penggantian dokumen rusak atau hilang.',
-          nextId: 'detail-kebutuhan',
-        },
-        {
-          id: 'akta-kematian',
-          title: 'Akta Kematian',
-          description:
-            'Pelaporan resmi warga yang meninggal dunia untuk pemutakhiran data kependudukan dan waris.',
-          nextId: 'detail-kebutuhan',
-        },
-        {
-          id: 'skpwni',
-          title: 'Surat Pindah Domisili (SKPWNI)',
-          description:
-            'Kepindahan kependudukan antar RT/RW, kelurahan, kecamatan, maupun antar kota/provinsi.',
-          nextId: 'detail-kebutuhan',
-        },
-      ],
-    },
-    'detail-kebutuhan': {
-      id: 'detail-kebutuhan',
-      stepNumber: 2,
-      stepLabel: 'Detail Kebutuhan',
-      title: 'Apa status pencatatan kelahiran yang diperlukan?',
-      subtitle:
-        'Informasi ini menentukan daftar berkas persyaratan dan formulir yang harus dilengkapi.',
-      helpBox: {
-        text: 'Perlu panduan mengenai syarat saksi atau surat pengantar?',
-        linkText: 'Buka Panduan Persyaratan',
-        href: '#panduan-syarat',
-      },
-      options: [
-        {
-          id: 'kelahiran-baru',
-          title: 'Kelahiran Baru (Kurang dari 60 Hari)',
-          description:
-            'Pencatatan tepat waktu dengan surat keterangan kelahiran dari dokter/bidan.',
-          nextId: 'lokasi-waktu',
-        },
-        {
-          id: 'kelahiran-terlambat',
-          title: 'Kelahiran Terlambat (Lebih dari 60 Hari)',
-          description:
-            'Pencatatan yang melampaui batas waktu reguler membutuhkan surat pernyataan tanggung jawab mutlak.',
-          nextId: 'lokasi-waktu',
-        },
-      ],
-    },
-    'lokasi-waktu': {
-      id: 'lokasi-waktu',
-      stepNumber: 3,
-      stepLabel: 'Lokasi & Waktu',
-      title: 'Di mana lokasi pengurusan berkas kependudukan Anda?',
-      subtitle:
-        'Pilih kantor pelayanan atau loket administrasi terdekat dengan domisili Anda.',
-      helpBox: {
-        text: 'Cek daftar kantor Disdukcapil dan kecamatan aktif.',
-        linkText: 'Lihat Peta Layanan',
-        href: '#peta-layanan',
-      },
-      options: [
-        {
-          id: 'loket-disdukcapil',
-          title: 'Kantor Dinas Kependudukan dan Catatan Sipil',
-          description:
-            'Pelayanan terpadu satu atap tingkat kota/kabupaten dengan kuota harian reguler.',
-          nextId: 'hasil-rekomendasi',
-        },
-        {
-          id: 'loket-kecamatan',
-          title: 'Loket Pelayanan Administrasi Kecamatan Setempat',
-          description:
-            'Layanan dokumen di kantor kecamatan terdekat sesuai alamat pada Kartu Keluarga.',
-          nextId: 'hasil-rekomendasi',
-        },
-      ],
-    },
-    'hasil-rekomendasi': {
-      id: 'hasil-rekomendasi',
-      stepNumber: 4,
-      stepLabel: 'Hasil Rekomendasi',
-      title: 'Panduan dan Berkas Persyaratan Pengurusan',
-      subtitle:
-        'Berikut daftar lengkap dokumen, estimasi waktu penyelesaian, dan lokasi loket pelayanan Anda.',
-      isTerminalResult: true,
-      options: [],
-    },
-  },
-};
 
 interface HistoryEntry {
   questionId: string;
-  selectedOptionId: string | null;
+  selectedOptionIndex: number;
+}
+
+export interface WizardFinishPayload {
+  serviceId: string;
+  resultId: string;
+  answers: Record<string, string>;
 }
 
 export interface WizardEngineProps {
-  serviceData?: WizardServiceConfig;
-  initialSelectedOptionId?: string;
-  onFinish?: (answers: Record<string, string>) => void;
+  serviceData?: ServiceSchema;
+  onFinish?: (payload: WizardFinishPayload) => void;
 }
 
 export const WizardEngine: React.FC<WizardEngineProps> = ({
-  serviceData = DEFAULT_WIZARD_DATA,
-  initialSelectedOptionId = 'akta-kelahiran',
+  serviceData = getServiceById('permits-microbusiness-03') as ServiceSchema,
   onFinish,
 }) => {
   const [currentQuestionId, setCurrentQuestionId] = useState<string>(
-    serviceData.initialQuestionId
+    serviceData.startQuestionId
   );
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [answers, setAnswers] = useState<Record<string, string>>(() => {
-    // Inisialisasi dari initialSelectedOptionId untuk fixture visual
-    if (initialSelectedOptionId) {
-      return { [serviceData.initialQuestionId]: initialSelectedOptionId };
-    }
-    return {};
-  });
+  const [selectedIndices, setSelectedIndices] = useState<Record<string, number>>({});
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const toastTimeoutRef = useRef<number | null>(null);
 
+  // Reset state saat layanan yang dipilih berubah
+  useEffect(() => {
+    setCurrentQuestionId(serviceData.startQuestionId);
+    setHistory([]);
+    setSelectedIndices({});
+  }, [serviceData.id, serviceData.startQuestionId]);
+
+  // Konversi array questions JSON menjadi lookup map berdasarkan id
+  const questionMap = useMemo(() => {
+    const map: Record<string, RawJsonQuestion> = {};
+    (serviceData.questions || []).forEach((q) => {
+      map[q.id] = q;
+    });
+    return map;
+  }, [serviceData.questions]);
+
+  // Hitung total langkah dinamis dari properti `step` tertinggi pada JSON
+  const totalSteps = useMemo(() => {
+    if (!serviceData.questions || serviceData.questions.length === 0) return 1;
+    const maxStep = Math.max(...serviceData.questions.map((q) => q.step || 1));
+    return Math.max(1, maxStep);
+  }, [serviceData.questions]);
+
+  const stepDefinitions = useMemo(() => {
+    return Array.from({ length: totalSteps }, (_, idx) => ({
+      step: idx + 1,
+      label: `Langkah ${idx + 1}`,
+    }));
+  }, [totalSteps]);
+
   const currentQuestion =
-    serviceData.questions[currentQuestionId] ||
-    serviceData.questions[serviceData.initialQuestionId];
+    questionMap[currentQuestionId] || questionMap[serviceData.startQuestionId];
 
-  const currentStep = currentQuestion?.stepNumber || 1;
-  const totalSteps = serviceData.steps.length;
-  const selectedOptionId = answers[currentQuestionId] || null;
+  const currentStep = currentQuestion?.step || 1;
+  const selectedIndex =
+    currentQuestion && selectedIndices[currentQuestion.id] !== undefined
+      ? selectedIndices[currentQuestion.id]
+      : null;
 
-  // Persentase dinamis = langkah aktif / total
+  // Mapping format opsi JSON -> format QuestionOption milik QuestionCard
+  const mappedOptions: QuestionOption[] = useMemo(() => {
+    if (!currentQuestion) return [];
+    return currentQuestion.options.map((opt, idx) => ({
+      id: `opt-${idx}`,
+      title: opt.label,
+      description: '',
+      nextId: opt.nextId,
+    }));
+  }, [currentQuestion]);
+
+  const selectedOptionId =
+    selectedIndex !== null ? `opt-${selectedIndex}` : null;
+
+  const activeRawOption: RawJsonOption | null =
+    selectedIndex !== null && currentQuestion
+      ? currentQuestion.options[selectedIndex] || null
+      : null;
+
+  const helpBoxConfig: HelpBoxConfig | null = currentQuestion?.helpText
+    ? {
+        text: currentQuestion.helpText,
+        linkText: '',
+        href: '#panduan-bantuan',
+      }
+    : null;
+
   const progressPercent = Math.min(
     100,
     Math.round((currentStep / totalSteps) * 100)
@@ -206,46 +140,68 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
     }
   }, [currentQuestionId]);
 
-  // Handle pemilihan opsi radio
   const handleSelectOption = (optionId: string) => {
-    setAnswers((prev) => ({
+    const parsedIndex = Number(optionId.replace('opt-', ''));
+    if (Number.isNaN(parsedIndex) || !currentQuestion) return;
+
+    setSelectedIndices((prev) => ({
       ...prev,
-      [currentQuestionId]: optionId,
+      [currentQuestion.id]: parsedIndex,
     }));
   };
 
-  // Navigasi lanjut
+  // Menyusun map jawaban { [questionId]: labelOpsi } untuk kebutuhan URL stateless
+  const buildAnswersRecord = (
+    latestIndices: Record<string, number>
+  ): Record<string, string> => {
+    const record: Record<string, string> = {};
+    Object.entries(latestIndices).forEach(([qId, optIdx]) => {
+      const q = questionMap[qId];
+      if (q && q.options[optIdx]) {
+        record[qId] = q.options[optIdx].label;
+      }
+    });
+    return record;
+  };
+
   const handleContinue = () => {
-    if (!selectedOptionId) return;
+    if (selectedIndex === null || !currentQuestion) return;
 
-    const chosenOption = currentQuestion.options.find(
-      (opt) => opt.id === selectedOptionId
-    );
+    const chosenOption = currentQuestion.options[selectedIndex];
+    if (!chosenOption?.nextId) return;
 
-    if (!chosenOption?.nextId || chosenOption.nextId === 'hasil-rekomendasi') {
-      const updatedAnswers = {
-        ...answers,
-        [currentQuestionId]: selectedOptionId,
-      };
+    const targetId = chosenOption.nextId;
+
+    // Jika nextId adalah salah satu key pada `serviceData.results`, selesaikan wizard
+    if (serviceData.results && serviceData.results[targetId]) {
+      const finalAnswers = buildAnswersRecord({
+        ...selectedIndices,
+        [currentQuestion.id]: selectedIndex,
+      });
+
       if (onFinish) {
-        onFinish(updatedAnswers);
+        onFinish({
+          serviceId: serviceData.id,
+          resultId: targetId,
+          answers: finalAnswers,
+        });
       }
       return;
     }
 
-    const nextQuestionId = chosenOption.nextId;
-    setHistory((prev) => [
-      ...prev,
-      {
-        questionId: currentQuestionId,
-        selectedOptionId,
-      },
-    ]);
-
-    setCurrentQuestionId(nextQuestionId);
+    // Lanjut ke pertanyaan cabang berikutnya
+    if (questionMap[targetId]) {
+      setHistory((prev) => [
+        ...prev,
+        {
+          questionId: currentQuestion.id,
+          selectedOptionIndex: selectedIndex,
+        },
+      ]);
+      setCurrentQuestionId(targetId);
+    }
   };
 
-  // Navigasi kembali (mulai langkah 2)
   const handleBack = () => {
     if (history.length === 0) return;
 
@@ -254,17 +210,19 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
     setCurrentQuestionId(lastEntry.questionId);
   };
 
-  // Simpan Draf Sesi ke sessionStorage & tampilkan toast
   const handleSaveDraft = () => {
     try {
       const draftData = {
         serviceId: serviceData.id,
         currentQuestionId,
-        answers,
+        selectedIndices,
         history,
         savedAt: new Date().toISOString(),
       };
-      sessionStorage.setItem('wizard_session_draft', JSON.stringify(draftData));
+      sessionStorage.setItem(
+        `wizard_session_draft_${serviceData.id}`,
+        JSON.stringify(draftData)
+      );
       showToast('Draf sesi tersimpan');
     } catch {
       showToast('Gagal menyimpan draf sesi');
@@ -281,21 +239,33 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
     }, 3000);
   };
 
-  const isTerminal = Boolean(currentQuestion.isTerminalResult);
+  if (!currentQuestion) {
+    return (
+      <div className="wizard-engine">
+        <div className="content-container">
+          <p>Data pertanyaan layanan tidak ditemukan.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="wizard-engine">
       <div className="content-container">
         {/* Progress Header & Dynamic Bars */}
-        <div className="wizard-progress-section" aria-label="Progres Pengisian Layanan">
+        <div
+          className="wizard-progress-section"
+          aria-label="Progres Pengisian Layanan"
+        >
           <div className="progress-top-row">
             <span className="step-counter-text">
               LANGKAH {currentStep} DARI {totalSteps}
             </span>
-            <span className="step-percentage-text">{progressPercent}% Selesai</span>
+            <span className="step-percentage-text">
+              {progressPercent}% Selesai
+            </span>
           </div>
 
-          {/* Bar Grid Dinamis (3-5 Segmen) */}
           <div
             className="progress-bars-grid"
             style={{
@@ -307,7 +277,7 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
             aria-valuemax={100}
             aria-label={`Langkah ${currentStep} dari ${totalSteps}`}
           >
-            {serviceData.steps.map((st) => {
+            {stepDefinitions.map((st) => {
               const isPassed = st.step < currentStep;
               const isActive = st.step === currentStep;
               const barClass = isActive
@@ -320,14 +290,13 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
             })}
           </div>
 
-          {/* Label Segmen di Bawah Bar */}
           <div
             className="progress-labels-grid"
             style={{
               gridTemplateColumns: `repeat(${totalSteps}, 1fr)`,
             }}
           >
-            {serviceData.steps.map((st) => {
+            {stepDefinitions.map((st) => {
               const isPassed = st.step < currentStep;
               const isActive = st.step === currentStep;
               const labelClass = isActive
@@ -345,22 +314,44 @@ export const WizardEngine: React.FC<WizardEngineProps> = ({
           </div>
         </div>
 
+        {/* Penjelasan Kontekstual saat memilih opsi dengan properti `explanation` */}
+        {activeRawOption?.explanation && (
+          <div
+            className="wizard-explanation-alert"
+            role="note"
+            aria-live="polite"
+            style={{
+              backgroundColor: '#eff6ff',
+              border: '1px solid #bfdbfe',
+              borderRadius: '10px',
+              padding: '12px 16px',
+              marginBottom: '16px',
+              color: '#1e3a8a',
+              fontSize: '14px',
+              lineHeight: 1.5,
+            }}
+          >
+            <strong>💡 Penjelasan Bantuan: </strong>
+            <span>{activeRawOption.explanation}</span>
+          </div>
+        )}
+
         {/* Question Card Component */}
         <QuestionCard
           currentStep={currentStep}
-          stepLabel={currentQuestion.stepLabel}
-          title={currentQuestion.title}
-          subtitle={currentQuestion.subtitle}
-          options={currentQuestion.options}
+          stepLabel={serviceData.category}
+          title={currentQuestion.text}
+          subtitle={serviceData.title}
+          options={mappedOptions}
           selectedOptionId={selectedOptionId}
           onSelectOption={handleSelectOption}
           onContinue={handleContinue}
           onBack={handleBack}
           onSaveDraft={handleSaveDraft}
           canGoBack={history.length > 0}
-          isContinueDisabled={!selectedOptionId}
-          helpBox={currentQuestion.helpBox}
-          showHelpBox={!isTerminal && Boolean(currentQuestion.helpBox)}
+          isContinueDisabled={selectedIndex === null}
+          helpBox={helpBoxConfig}
+          showHelpBox={Boolean(helpBoxConfig)}
           headingRef={headingRef}
         />
       </div>

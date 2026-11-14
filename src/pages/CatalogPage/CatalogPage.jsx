@@ -4,7 +4,7 @@ import PageHeader from '../../components/catalog/PageHeader/PageHeader';
 import CatalogSearch from '../../components/catalog/CatalogSearch/CatalogSearch';
 import CatalogList from '../../components/catalog/CatalogList/CatalogList';
 import ServiceModal from '../../components/catalog/ServiceModal/ServiceModal';
-import { servicesData } from '../../data/servicesData';
+import { servicesData, getServiceById, resolveWizardResult } from '../../data/services';
 
 export default function CatalogPage({ initialSearch = '' }) {
   const [searchQuery, setSearchQuery] = useState(initialSearch);

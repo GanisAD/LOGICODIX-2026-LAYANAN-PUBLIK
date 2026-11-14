@@ -3,7 +3,7 @@ import './WizardModal.css';
 import CloseIcon from '../icons/CloseIcon';
 import CheckIcon from '../icons/CheckIcon';
 import ChevronRightIcon from '../icons/ChevronRightIcon';
-import { servicesData } from '../../data/servicesData'; // Sesuaikan path folder data kamu
+import { servicesData, getServiceById, resolveWizardResult } from '../../data/services'; // Sesuaikan path folder data kamu
 
 export default function WizardModal({
   isOpen,

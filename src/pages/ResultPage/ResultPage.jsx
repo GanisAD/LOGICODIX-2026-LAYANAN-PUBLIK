@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ResultPage.css';
-import { servicesData } from '../../data/servicesData'; // Sesuaikan path folder data kamu
+import { resolveWizardResult } from '../../data/services'; // Sesuaikan path folder data kamu
 
 export default function ResultPage({ onNavigate, serviceIdProp, resultIdProp }) {
   const getSearchParams = () => {
@@ -20,18 +20,25 @@ export default function ResultPage({ onNavigate, serviceIdProp, resultIdProp }) 
   }, []);
 
   // Ambil data layanan & hasil spesifik berdasarkan parameter URL (?service=...&res=...)
-  const wizardServices = servicesData.filter(
-    (s) => s.startQuestionId && s.results
-  );
-  const serviceId =
+ const serviceId =
     serviceIdProp || params.get('service') || 'permits-microbusiness-03';
-  const currentService =
-    wizardServices.find((s) => s.id === serviceId) || wizardServices[0];
+  const resultId = resultIdProp || params.get('res');
 
-  const resultId =
-    resultIdProp || params.get('res') || Object.keys(currentService.results)[0];
-  const currentResult =
-    currentService.results[resultId] || Object.values(currentService.results)[0];
+  let parsedAnswers = {};
+  const encodedAns = params.get('ans');
+  if (encodedAns) {
+    try {
+      parsedAnswers = JSON.parse(decodeURIComponent(atob(encodedAns)));
+    } catch {
+      parsedAnswers = {};
+    }
+  }
+
+  const { service: currentService, result: currentResult } = resolveWizardResult(
+    serviceId,
+    resultId,
+    parsedAnswers
+  );
 
   const regNumber = `#SPK-SBY-${currentResult.id.toUpperCase().slice(-6)}`;
 

@@ -1,0 +1,180 @@
+{
+  "id": "permits-microbusiness-03",
+  "slug": "izin-usaha-umkm-nib",
+  "title": "Pendampingan & Penerbitan Izin Usaha UMKM (NIB)",
+  "shortDescription": "Layanan penerbitan Nomor Induk Berusaha (NIB) dan pendampingan perizinan berusaha berbasis risiko bagi pelaku UMKM di Surabaya.",
+  "category": "Perizinan Berusaha UMKM",
+  "agency": "DPMPTSP Kota Surabaya & Dinkopumdag Kota Surabaya",
+  "estimatedProcessingTime": "1–2 hari kerja",
+  "officialFee": 0,
+  "officialFeeLabel": "Rp0 (Gratis)",
+  "sourceUrl": "https://dpm-ptsp.surabaya.go.id",
+  "lastVerified": "2026-11-14",
+  "antiExtortionChannels": [
+    {
+      "name": "Media Center / Aplikasi WargaKu Surabaya",
+      "url": "https://mediacenter.surabaya.go.id",
+      "contact": "0812-3025-7000"
+    },
+    {
+      "name": "Whistleblowing System (WBS) Pemkot Surabaya",
+      "url": "https://wbs.surabaya.go.id",
+      "contact": "wbs.surabaya.go.id"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Mal Pelayanan Publik (MPP) Gedung Siola Lt. 3 - Klinik Investasi DPMPTSP",
+      "address": "Jl. Tunjungan No. 1-3, Genteng, Kota Surabaya 60275",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB",
+      "lat": -7.25634,
+      "lng": 112.73761
+    },
+    {
+      "name": "Sentra Pelayanan Publik (SPP) Menur",
+      "address": "Jl. Raya Menur No. 31C, Manyar Sabrangan, Mulyorejo, Surabaya",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB",
+      "lat": -7.28312,
+      "lng": 112.76285
+    }
+  ],
+  "startQuestionId": "q1-bentuk-usaha",
+  "questions": [
+    {
+      "id": "q1-bentuk-usaha",
+      "step": 1,
+      "text": "Apa bentuk badan usaha yang Anda jalankan saat ini?",
+      "options": [
+        {
+          "label": "Usaha Perseorangan (Milik pribadi / pedagang / pekerja lepas)",
+          "nextId": "q2-skala-modal"
+        },
+        {
+          "label": "Badan Usaha (PT Perorangan, CV, PT Biasa, atau Koperasi)",
+          "nextId": "res-nib-badan-usaha"
+        }
+      ]
+    },
+    {
+      "id": "q2-skala-modal",
+      "step": 2,
+      "text": "Berapa perkiraan modal usaha Anda (di luar tanah dan bangunan tempat usaha)?",
+      "options": [
+        {
+          "label": "Usaha Mikro (Maksimal Rp1 Miliar)",
+          "nextId": "q3-kbli-dan-pendampingan"
+        },
+        {
+          "label": "Usaha Kecil (Lebih dari Rp1 Miliar s.d. Rp5 Miliar)",
+          "nextId": "q3-kbli-dan-pendampingan"
+        },
+        {
+          "label": "Tidak tahu",
+          "explanation": "Sebagian besar usaha rumahan, kedai, toko kelontong, dan jasa rintisan masuk kategori Usaha Mikro (modal di bawah Rp1 Miliar).",
+          "nextId": "q3-kbli-dan-pendampingan"
+        }
+      ]
+    },
+    {
+      "id": "q3-kbli-dan-pendampingan",
+      "step": 3,
+      "text": "Apakah Anda sudah mengetahui kode KBLI usaha dan ingin mengurusnya secara mandiri atau didampingi petugas?",
+      "options": [
+        {
+          "label": "Sudah siap mengurus mandiri secara online",
+          "nextId": "res-nib-umk-mandiri"
+        },
+        {
+          "label": "Butuh konsultasi KBLI / pendampingan loket Pemkot",
+          "nextId": "res-nib-umk-pendampingan"
+        },
+        {
+          "label": "Tidak tahu",
+          "explanation": "KBLI adalah kode 5 digit klasifikasi jenis usaha (misal: 56102 untuk Rumah/Warung Makan). Jika belum tahu, Anda bisa memanfaatkan loket Klinik Investasi gratis Pemkot.",
+          "nextId": "res-nib-umk-pendampingan"
+        }
+      ]
+    }
+  ],
+  "results": {
+    "res-nib-umk-mandiri": {
+      "id": "res-nib-umk-mandiri",
+      "title": "Penerbitan NIB UMK Perseorangan (Jalur Mandiri Online)",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "1 hari kerja (terbit otomatis secara elektronik)",
+      "sourceUrl": "https://sswalfa.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "e-KTP Pemilik Usaha (NIK aktif & valid Dukcapil)", "required": true },
+        { "id": "doc-2", "name": "Nomor WhatsApp dan Email aktif untuk kode OTP", "required": true },
+        { "id": "doc-3", "name": "NPWP Pribadi pemilik usaha (opsional untuk usaha mikro)", "required": false },
+        { "id": "doc-4", "name": "Data lokasi usaha di Surabaya, luas lahan, dan kode KBLI 2020", "required": true }
+      ],
+      "steps": [
+        "Akses portal Surabaya Single Window (SSW) Alfa di sswalfa.surabaya.go.id atau sistem OSS RBA (oss.go.id).",
+        "Pilih menu Daftar > Skala Usaha UMK (Orang Perseorangan) dan verifikasi akun via Email/WhatsApp.",
+        "Lengkapi profil pelaku usaha menggunakan NIK e-KTP.",
+        "Tambahkan bidang usaha dengan memilih kode KBLI 2020 dan isi alamat lengkap lokasi usaha di Surabaya.",
+        "Centang pernyataan mandiri kesanggupan pengelolaan lingkungan (SPPL) dan K3L.",
+        "Terbitkan dan unduh dokumen Nomor Induk Berusaha (NIB) dalam format PDF."
+      ],
+      "officialChannels": [
+        { "name": "Surabaya Single Window (SSW) Alfa", "url": "https://sswalfa.surabaya.go.id", "type": "online" },
+        { "name": "DPMPTSP Kota Surabaya", "url": "https://dpm-ptsp.surabaya.go.id", "type": "online" }
+      ]
+    },
+    "res-nib-umk-pendampingan": {
+      "id": "res-nib-umk-pendampingan",
+      "title": "Pendampingan Penerbitan NIB UMKM di Loket Pemkot Surabaya",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "1–2 hari kerja",
+      "sourceUrl": "https://dpm-ptsp.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "e-KTP Asli Pemilik Usaha", "required": true },
+        { "id": "doc-2", "name": "Ponsel aktif dengan akses Email & WhatsApp untuk verifikasi OTP", "required": true },
+        { "id": "doc-3", "name": "NPWP Pribadi (jika sudah memiliki)", "required": false },
+        { "id": "doc-4", "name": "Catatan informasi usaha (nama usaha, alamat lengkap, perkiraan modal)", "required": true }
+      ],
+      "steps": [
+        "Kunjungi Klinik Investasi DPMPTSP di MPP Gedung Siola Lt. 3, SPP Menur, atau jadwal pelayanan Balai RW (Selasa & Jumat).",
+        "Ambil nomor antrian konsultasi perizinan UMKM.",
+        "Konsultasikan jenis kegiatan usaha kepada petugas untuk penentuan kode KBLI 2020 yang akurat dan penapisan tata ruang.",
+        "Petugas mendampingi proses input data pada sistem OSS RBA / SSW Alfa hingga NIB terbit.",
+        "Cetak atau simpan file PDF NIB yang telah diterbitkan."
+      ],
+      "officialChannels": [
+        { "name": "Klinik Investasi MPP Siola Lt. 3 & SPP Menur", "url": "https://dpm-ptsp.surabaya.go.id", "type": "offline" },
+        { "name": "Layanan Balai RW Surabaya (Selasa & Jumat)", "url": "https://sswalfa.surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-nib-badan-usaha": {
+      "id": "res-nib-badan-usaha",
+      "title": "Penerbitan NIB UMKM Berbentuk Badan Usaha (CV / PT / PT Perorangan)",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis untuk NIB)",
+      "estimatedTime": "1–2 hari kerja",
+      "sourceUrl": "https://dpm-ptsp.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Akta Pendirian Badan Usaha & SK Pengesahan Kemenkumham (AHU)", "required": true },
+        { "id": "doc-2", "name": "NPWP Badan Usaha yang berstatus valid (KSWP Valid)", "required": true },
+        { "id": "doc-3", "name": "e-KTP Direktur / Penanggung Jawab Utama", "required": true },
+        { "id": "doc-4", "name": "Email & Nomor WhatsApp resmi perusahaan", "required": true }
+      ],
+      "steps": [
+        "Pastikan data akta dan SK AHU badan usaha sudah terintegrasi dan NPWP badan berstatus valid.",
+        "Akses SSW Alfa (sswalfa.surabaya.go.id) atau OSS RBA menggunakan hak akses Badan Usaha.",
+        "Tarik data legalitas AHU, lalu lengkapi data KBLI, modal disetor, dan lokasi usaha di Surabaya.",
+        "Selesaikan persetujuan pernyataan mandiri (SPPL/K3L) atau verifikasi tata ruang.",
+        "Unduh NIB dan Sertifikat Standar (jika tingkat risiko Menengah Rendah)."
+      ],
+      "officialChannels": [
+        { "name": "Surabaya Single Window (SSW) Alfa", "url": "https://sswalfa.surabaya.go.id", "type": "online" },
+        { "name": "Klinik Investasi DPMPTSP MPP Siola Lt. 3", "url": "https://dpm-ptsp.surabaya.go.id", "type": "offline" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "id": "adminduk-ktp-01",
+  "slug": "penerbitan-cetak-ulang-ktp-el",
+  "title": "Penerbitan & Cetak Ulang KTP Elektronik (KTP-el)",
+  "shortDescription": "Layanan perekaman biometrik, penerbitan pemula, perubahan data, hingga cetak ulang e-KTP hilang atau rusak bagi warga Kota Surabaya.",
+  "category": "Administrasi Kependudukan",
+  "agency": "Dinas Kependudukan dan Pencatatan Sipil (Dispendukcapil) Kota Surabaya",
+  "estimatedProcessingTime": "Maksimal 7 hari kerja",
+  "officialFee": 0,
+  "officialFeeLabel": "Rp0 (Gratis)",
+  "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+  "lastVerified": "2026-11-14",
+  "antiExtortionChannels": [
+    {
+      "name": "Media Center / Aplikasi WargaKu Surabaya",
+      "url": "https://mediacenter.surabaya.go.id",
+      "contact": "0812-3025-7000"
+    },
+    {
+      "name": "Whistleblowing System (WBS) Pemkot Surabaya",
+      "url": "https://wbs.surabaya.go.id",
+      "contact": "wbs.surabaya.go.id"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Mal Pelayanan Publik (MPP) Gedung Siola - Loket Dispendukcapil",
+      "address": "Jl. Tunjungan No. 1-3, Genteng, Kota Surabaya",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB",
+      "lat": -7.25634,
+      "lng": 112.73761
+    },
+    {
+      "name": "Kantor Kecamatan / Kelurahan / Balai RW Setempat",
+      "address": "31 Kecamatan, 154 Kelurahan, & Balai RW se-Kota Surabaya",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB (Balai RW: Selasa & Jumat)",
+      "lat": -7.25747,
+      "lng": 112.75209
+    }
+  ],
+  "startQuestionId": "q1-kondisi-ktp",
+  "questions": [
+    {
+      "id": "q1-kondisi-ktp",
+      "step": 1,
+      "text": "Apa keperluan pengurusan KTP Elektronik (KTP-el) Anda saat ini?",
+      "options": [
+        {
+          "label": "Pemula (baru berusia 17 tahun / belum pernah punya KTP-el)",
+          "nextId": "q2-rekam-biometrik"
+        },
+        {
+          "label": "Perubahan data (alamat, status perkawinan, pekerjaan, dll.)",
+          "nextId": "q3-status-kk"
+        },
+        {
+          "label": "KTP-el hilang",
+          "nextId": "res-ktp-hilang"
+        },
+        {
+          "label": "KTP-el rusak / patah / chip tidak terbaca",
+          "nextId": "res-ktp-rusak"
+        }
+      ]
+    },
+    {
+      "id": "q2-rekam-biometrik",
+      "step": 2,
+      "text": "Apakah Anda sudah pernah melakukan perekaman foto, sidik jari, dan iris mata?",
+      "helpText": "Perekaman biometrik wajib dilakukan secara fisik satu kali seumur hidup di Kantor Kecamatan atau MPP Siola.",
+      "options": [
+        {
+          "label": "Sudah pernah melakukan perekaman",
+          "nextId": "res-ktp-pemula-sudah-rekam"
+        },
+        {
+          "label": "Belum pernah melakukan perekaman",
+          "nextId": "res-ktp-pemula-belum-rekam"
+        },
+        {
+          "label": "Tidak tahu",
+          "explanation": "Jika Anda belum pernah datang ke Kecamatan/Siola untuk foto KTP resmi setelah usia 17 tahun, berarti Anda perlu melakukan perekaman terlebih dahulu.",
+          "nextId": "res-ktp-pemula-belum-rekam"
+        }
+      ]
+    },
+    {
+      "id": "q3-status-kk",
+      "step": 2,
+      "text": "Apakah elemen data pada Kartu Keluarga (KK) Anda sudah diperbarui sesuai perubahan terbaru?",
+      "helpText": "Pencetakan KTP-el perubahan data mensyaratkan data di KK sudah ter-update terlebih dahulu.",
+      "options": [
+        {
+          "label": "Ya, data di KK sudah terbaru",
+          "nextId": "res-ktp-perubahan-data"
+        },
+        {
+          "label": "Belum, data di KK masih yang lama",
+          "nextId": "res-ktp-update-kk-dulu"
+        },
+        {
+          "label": "Tidak tahu",
+          "explanation": "Cek bagian bawah/kolom data pada KK terbaru Anda. Jika belum berubah, Anda dapat mengajukan pembaruan KK sekaligus pencetakan KTP-el di aplikasi KNG.",
+          "nextId": "res-ktp-update-kk-dulu"
+        }
+      ]
+    }
+  ],
+  "results": {
+    "res-ktp-pemula-sudah-rekam": {
+      "id": "res-ktp-pemula-sudah-rekam",
+      "title": "Pencetakan KTP-el Pemula (Sudah Rekam Biometrik)",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja setelah penunggalan data Kemendagri selesai",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Scan/Fotokopi Kartu Keluarga (KK) Kota Surabaya", "required": true },
+        { "id": "doc-2", "name": "Scan/Fotokopi Akta Kelahiran atau Ijazah terakhir", "required": true },
+        { "id": "doc-3", "name": "Bukti tanda terima perekaman biometrik (jika ada)", "required": false }
+      ],
+      "steps": [
+        "Buka portal Klampid New Generation (KNG) melalui dispendukcapil.surabaya.go.id atau datang ke Balai RW / Kelurahan.",
+        "Pilih menu Pendaftaran Penduduk > Permohonan KTP Elektronik (Pemula).",
+        "Unggah dokumen persyaratan dan pilih titik pengambilan fisik KTP (Kelurahan setempat).",
+        "Simpan e-Kitir (barcode) untuk memantau status penunggalan dan pencetakan.",
+        "Ambil fisik KTP-el di Kelurahan sesuai jadwal pada notifikasi e-Kitir."
+      ],
+      "officialChannels": [
+        { "name": "Klampid New Generation (KNG)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" },
+        { "name": "Kelurahan & Balai RW (Selasa & Jumat)", "url": "https://dispendukcapil.surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-ktp-pemula-belum-rekam": {
+      "id": "res-ktp-pemula-belum-rekam",
+      "title": "Perekaman Biometrik & Penerbitan KTP-el Pemula",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja sejak perekaman dan berkas lengkap",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Kartu Keluarga (KK) Kota Surabaya asli/fotokopi", "required": true },
+        { "id": "doc-2", "name": "Akta Kelahiran atau Ijazah terakhir", "required": true }
+      ],
+      "steps": [
+        "Datang langsung ke Kantor Kecamatan domisili atau MPP Gedung Siola dengan membawa dokumen asli.",
+        "Ambil antrian perekaman biometrik KTP-el di loket pelayanan.",
+        "Lakukan verifikasi data, pengambilan foto, tanda tangan digital, sidik jari, dan pemindaian iris mata.",
+        "Terima tanda bukti perekaman / e-Kitir dari petugas.",
+        "Ambil fisik KTP-el di Kelurahan setempat setelah status cetak selesai."
+      ],
+      "officialChannels": [
+        { "name": "Kantor Kecamatan Domisili & MPP Siola", "url": "https://dispendukcapil.surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-ktp-perubahan-data": {
+      "id": "res-ktp-perubahan-data",
+      "title": "Cetak Ulang KTP-el Karena Perubahan Elemen Data",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Kartu Keluarga (KK) terbaru yang datanya sudah diperbarui", "required": true },
+        { "id": "doc-2", "name": "Fisik KTP-el lama (wajib diserahkan saat pengambilan KTP baru)", "required": true }
+      ],
+      "steps": [
+        "Ajukan permohonan cetak ulang KTP-el melalui aplikasi Klampid New Generation (KNG).",
+        "Unggah scan KK terbaru dan foto KTP-el lama.",
+        "Pilih lokasi pengambilan di Kelurahan setempat dan simpan e-Kitir.",
+        "Datang ke Kelurahan dengan membawa KTP-el lama untuk ditukarkan dengan KTP-el baru."
+      ],
+      "officialChannels": [
+        { "name": "Klampid New Generation (KNG)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" },
+        { "name": "Balai RW & Kelurahan Setempat", "url": "https://dispendukcapil.surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-ktp-update-kk-dulu": {
+      "id": "res-ktp-update-kk-dulu",
+      "title": "Pembaruan Data KK Sekaligus Penerbitan KTP-el Baru",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Kartu Keluarga (KK) lama", "required": true },
+        { "id": "doc-2", "name": "Fisik KTP-el lama", "required": true },
+        { "id": "doc-3", "name": "Dokumen pendukung perubahan data (Buku Nikah/Akta Cerai/Ijazah/SK Kerja)", "required": true }
+      ],
+      "steps": [
+        "Ajukan layanan Perubahan Biodata / Pecah-Pindah KK terlebih dahulu di aplikasi KNG.",
+        "Unggah dokumen pendukung perubahan elemen data yang sah.",
+        "Setelah KK digital terbaru terbit, ajukan cetak ulang KTP-el pada menu Pendaftaran Penduduk di KNG.",
+        "Tukarkan fisik KTP-el lama dengan KTP-el baru di Kelurahan saat e-Kitir berstatus selesai."
+      ],
+      "officialChannels": [
+        { "name": "Klampid New Generation (KNG)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" }
+      ]
+    },
+    "res-ktp-hilang": {
+      "id": "res-ktp-hilang",
+      "title": "Penggantian / Cetak Ulang KTP-el Hilang",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Surat Keterangan Kehilangan dari Kepolisian (Polsek/Polrestabes) asli", "required": true },
+        { "id": "doc-2", "name": "Scan/Fotokopi Kartu Keluarga (KK) Kota Surabaya", "required": true }
+      ],
+      "steps": [
+        "Urus Surat Keterangan Kehilangan barang/dokumen di kantor Kepolisian terdekat.",
+        "Login ke portal Klampid New Generation (KNG) di dispendukcapil.surabaya.go.id atau kunjungi Balai RW.",
+        "Pilih menu Pengajuan KTP-el Hilang dan unggah scan KK beserta Surat Kehilangan Kepolisian.",
+        "Simpan e-Kitir dan ambil fisik KTP-el baru di Kelurahan dengan menyerahkan Surat Kehilangan asli."
+      ],
+      "officialChannels": [
+        { "name": "Klampid New Generation (KNG)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" },
+        { "name": "Kelurahan & Balai RW Setempat", "url": "https://dispendukcapil.surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-ktp-rusak": {
+      "id": "res-ktp-rusak",
+      "title": "Penggantian / Cetak Ulang KTP-el Rusak",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis)",
+      "estimatedTime": "Maksimal 7 hari kerja",
+      "sourceUrl": "https://dispendukcapil.surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Fisik KTP-el lama yang rusak", "required": true },
+        { "id": "doc-2", "name": "Scan/Fotokopi Kartu Keluarga (KK) Kota Surabaya", "required": true }
+      ],
+      "steps": [
+        "Foto fisik KTP-el yang rusak dengan jelas.",
+        "Ajukan permohonan melalui aplikasi Klampid New Generation (KNG) atau Balai RW.",
+        "Unggah scan KK dan foto KTP-el rusak, lalu pilih titik pengambilan di Kelurahan.",
+        "Bawa fisik KTP-el rusak ke Kelurahan untuk ditukarkan dengan KTP-el baru setelah e-Kitir selesai."
+      ],
+      "officialChannels": [
+        { "name": "Klampid New Generation (KNG)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" },
+        { "name": "Kelurahan & Balai RW Setempat", "url": "https://dispendukcapil.surabaya.go.id", "type": "offline" }
+      ]
+    }
+  }
+}

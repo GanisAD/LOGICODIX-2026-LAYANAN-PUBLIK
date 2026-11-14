@@ -1,0 +1,168 @@
+{
+  "id": "health-bpjs-pbi-02",
+  "slug": "pendaftaran-reaktivasi-bpjs-pbi-pemda",
+  "title": "Pendaftaran & Reaktivasi BPJS Kesehatan PBI Pemda Surabaya",
+  "shortDescription": "Layanan pendaftaran baru, mutasi, atau aktivasi kembali kepesertaan JKN-KIS yang iurannya ditanggung APBD Pemerintah Kota Surabaya.",
+  "category": "Jaminan Kesehatan Daerah",
+  "agency": "Dinas Sosial (Dinsos) & Dinas Kesehatan Kota Surabaya",
+  "estimatedProcessingTime": "1–3 hari kerja",
+  "officialFee": 0,
+  "officialFeeLabel": "Rp0 (Gratis - Ditanggung APBD Pemkot Surabaya)",
+  "sourceUrl": "https://surabaya.go.id",
+  "lastVerified": "2026-11-14",
+  "antiExtortionChannels": [
+    {
+      "name": "Media Center / Aplikasi WargaKu Surabaya",
+      "url": "https://mediacenter.surabaya.go.id",
+      "contact": "0812-3025-7000"
+    },
+    {
+      "name": "Whistleblowing System (WBS) Pemkot Surabaya",
+      "url": "https://wbs.surabaya.go.id",
+      "contact": "wbs.surabaya.go.id"
+    }
+  ],
+  "locations": [
+    {
+      "name": "Kantor Kelurahan & Balai RW Domisili KK Surabaya",
+      "address": "154 Kantor Kelurahan & Balai RW se-Kota Surabaya",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB (Balai RW: Selasa & Jumat)",
+      "lat": -7.25747,
+      "lng": 112.75209
+    },
+    {
+      "name": "Kantor Dinas Sosial (Dinsos) Kota Surabaya",
+      "address": "Jl. Arif Rahman Hakim No. 131-133, Keputih, Sukolilo, Surabaya",
+      "operatingHours": "Senin–Jumat, 08.00–15.00 WIB",
+      "lat": -7.29138,
+      "lng": 112.79724
+    }
+  ],
+  "startQuestionId": "q1-domisili-nik",
+  "questions": [
+    {
+      "id": "q1-domisili-nik",
+      "step": 1,
+      "text": "Apakah pemohon memiliki KTP dan Kartu Keluarga (KK) Kota Surabaya?",
+      "options": [
+        {
+          "label": "Ya, ber-KTP dan KK Kota Surabaya",
+          "nextId": "q2-status-kepesertaan"
+        },
+        {
+          "label": "Tidak (KTP/KK luar Kota Surabaya)",
+          "nextId": "res-bpjs-luar-surabaya"
+        }
+      ]
+    },
+    {
+      "id": "q2-status-kepesertaan",
+      "step": 2,
+      "text": "Bagaimana status kepesertaan BPJS Kesehatan pemohon saat ini?",
+      "options": [
+        {
+          "label": "Belum pernah terdaftar BPJS Kesehatan sama sekali",
+          "nextId": "q3-kondisi-medis"
+        },
+        {
+          "label": "Nonaktif karena pernah terdaftar di perusahaan (PPU) / pindah segmen mandiri",
+          "nextId": "q3-kondisi-medis"
+        },
+        {
+          "label": "Tidak tahu",
+          "explanation": "Status keaktifan NIK dapat dicek melalui Kelurahan atau layanan WhatsApp PANDAWA BPJS Kesehatan (0811-8165-165).",
+          "nextId": "q3-kondisi-medis"
+        }
+      ]
+    },
+    {
+      "id": "q3-kondisi-medis",
+      "step": 3,
+      "text": "Apakah pemohon sedang dalam kondisi darurat medis atau menjalani rawat inap saat ini?",
+      "options": [
+        {
+          "label": "Ya, sedang rawat inap / membutuhkan tindakan medis segera",
+          "nextId": "res-bpjs-aktivasi-darurat"
+        },
+        {
+          "label": "Tidak, pengajuan reguler untuk jaminan kesehatan keluarga",
+          "nextId": "res-bpjs-reguler-kelurahan"
+        }
+      ]
+    }
+  ],
+  "results": {
+    "res-bpjs-reguler-kelurahan": {
+      "id": "res-bpjs-reguler-kelurahan",
+      "title": "Pendaftaran / Alih Segmen BPJS Kesehatan PBI Pemda (Reguler)",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis - Ditanggung APBD Pemkot)",
+      "estimatedTime": "1–3 hari kerja verifikasi Dinsos (aktivasi mengikuti siklus sistem BPJS)",
+      "sourceUrl": "https://surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Fotokopi & Asli Kartu Keluarga (KK) Kota Surabaya", "required": true },
+        { "id": "doc-2", "name": "Fotokopi & Asli e-KTP seluruh anggota keluarga yang diajukan", "required": true },
+        { "id": "doc-3", "name": "Surat Keterangan Tidak Mampu (SKTM) / verifikasi Gamiskin dari Kelurahan", "required": true },
+        { "id": "doc-4", "name": "Bukti nonaktif dari perusahaan (jika sebelumnya peserta PPU pekerja)", "required": false }
+      ],
+      "steps": [
+        "Datang ke Kantor Kelurahan domisili atau temui petugas pendamping di Balai RW (Selasa & Jumat).",
+        "Sampaikan permohonan pendaftaran baru atau mutasi ke segmen BPJS Kesehatan PBI Pemda (APBD Surabaya).",
+        "Petugas Kelurahan bersama Kader Surabaya Hebat (KSH) melakukan verifikasi data sosial-ekonomi warga.",
+        "Berkas diusulkan ke Dinas Sosial dan Dinas Kesehatan Kota Surabaya untuk didaftarkan ke BPJS Kesehatan.",
+        "Cek status keaktifan secara berkala menggunakan NIK KTP di Puskesmas terdekat atau aplikasi Mobile JKN."
+      ],
+      "officialChannels": [
+        { "name": "Kantor Kelurahan & Balai RW Surabaya", "url": "https://surabaya.go.id", "type": "offline" },
+        { "name": "Dinas Sosial Kota Surabaya", "url": "https://surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-bpjs-aktivasi-darurat": {
+      "id": "res-bpjs-aktivasi-darurat",
+      "title": "Aktivasi Cepat BPJS Kesehatan PBI Pemda (Kondisi Darurat / Rawat Inap)",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Gratis - Ditanggung APBD Pemkot)",
+      "estimatedTime": "1x24 jam s.d. 3 hari kerja (jalur prioritas medis)",
+      "sourceUrl": "https://surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "Kartu Keluarga (KK) dan e-KTP Kota Surabaya", "required": true },
+        { "id": "doc-2", "name": "Surat Keterangan Rawat Inap / Rujukan dari Puskesmas atau RSUD", "required": true },
+        { "id": "doc-3", "name": "Surat Pengantar Kelurahan / verifikasi kelayakan Dinsos", "required": true }
+      ],
+      "steps": [
+        "Minta Surat Keterangan Rawat Inap atau rekomendasi medis dari pihak Rumah Sakit / Puskesmas.",
+        "Keluarga pemohon membawa dokumen KTP, KK Surabaya, dan surat RS ke Kelurahan setempat atau loket layanan Dinsos / Dinkes.",
+        "Petugas memproses verifikasi cepat untuk pengaktifan segmen PBI APBD Pemkot Surabaya.",
+        "Serahkan bukti aktivasi kepesertaan ke bagian administrasi Rumah Sakit sebelum pasien pulang (maksimal 3x24 jam hari kerja sejak masuk RS)."
+      ],
+      "officialChannels": [
+        { "name": "Kantor Kelurahan & Puskesmas Setempat", "url": "https://surabaya.go.id", "type": "offline" },
+        { "name": "Dinas Sosial Kota Surabaya", "url": "https://surabaya.go.id", "type": "offline" }
+      ]
+    },
+    "res-bpjs-luar-surabaya": {
+      "id": "res-bpjs-luar-surabaya",
+      "title": "Informasi Kepesertaan BPJS Kesehatan untuk Warga Non-KTP Surabaya",
+      "officialFee": 0,
+      "officialFeeLabel": "Rp0 (Untuk pengurusan pindah domisili / mutasi)",
+      "estimatedTime": "Menyesuaikan domisili asal atau proses pindah penduduk",
+      "sourceUrl": "https://surabaya.go.id",
+      "lastVerified": "2026-11-14",
+      "documents": [
+        { "id": "doc-1", "name": "e-KTP dan Kartu Keluarga (KK) daerah asal", "required": true },
+        { "id": "doc-2", "name": "Surat Keterangan Pindah Warga Negara Indonesia (SKPWNI) jika ingin pindah ke Surabaya", "required": false }
+      ],
+      "steps": [
+        "Program BPJS Kesehatan PBI Pemda (APBD) Kota Surabaya diperuntukkan khusus bagi penduduk ber-NIK dan KK Kota Surabaya.",
+        "Jika Anda berencana menetap di Surabaya, urus terlebih dahulu perpindahan penduduk (SKPWNI) ke Dispendukcapil Surabaya melalui dispendukcapil.surabaya.go.id.",
+        "Jika tidak pindah domisili, pengajuan PBI daerah dilakukan melalui Dinas Sosial kabupaten/kota sesuai alamat KTP asal."
+      ],
+      "officialChannels": [
+        { "name": "Portal Pemkot Surabaya", "url": "https://surabaya.go.id", "type": "online" },
+        { "name": "Dispendukcapil Surabaya (Layanan Pindah Datang)", "url": "https://dispendukcapil.surabaya.go.id", "type": "online" }
+      ]
+    }
+  }
+}
